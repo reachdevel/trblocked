@@ -1,0 +1,46 @@
+name: release
+
+# Publishes to npm when a version tag is pushed (git tag v1.2.3 && git push origin v1.2.3).
+# No npm token is stored anywhere: npm trusts this workflow through OIDC ("trusted publishing"),
+# and the package is published with a provenance attestation that links it to this commit.
+on:
+  push:
+    tags: ["v*"]
+
+permissions:
+  contents: write   # create the GitHub release
+  id-token: write   # OIDC token for npm trusted publishing and provenance
+
+concurrency:
+  group: release
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          registry-url: https://registry.npmjs.org
+      - name: Trusted publishing needs npm >= 11.5.1
+        run: npm install -g npm@^11.5.1
+      - name: The tag must match package.json
+        run: |
+          version="$(node -p "require('./package.json').version")"
+          if [ "v$version" != "$GITHUB_REF_NAME" ]; then
+            echo "::error::tag $GITHUB_REF_NAME does not match package.json version $version"
+            exit 1
+          fi
+      - run: npm ci
+      - name: Publish (prepublishOnly builds, type-checks and tests first)
+        run: |
+          case "$GITHUB_REF_NAME" in *-*) dist_tag=next ;; *) dist_tag=latest ;; esac
+          npm publish --tag "$dist_tag" --provenance
+      - name: GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          case "$GITHUB_REF_NAME" in *-*) flag="--prerelease" ;; *) flag="" ;; esac
+          gh release view "$GITHUB_REF_NAME" >/dev/null 2>&1 || gh release create "$GITHUB_REF_NAME" --verify-tag --generate-notes $flag
