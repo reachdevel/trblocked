@@ -1,6 +1,6 @@
 {
   "name": "trblocked",
-  "version": "1.0.0",
+  "version": "1.0.1-rc.0",
   "description": "Is this site blocked in Turkey, and how? Tells DNS, IP, SNI/DPI, HTTP and throttling blocks apart. / Bir sitenin Türkiye'de engelli olup olmadığını ve nasıl engellendiğini söyler.",
   "keywords": [
     "turkey",
