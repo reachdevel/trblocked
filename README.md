@@ -1,5 +1,7 @@
 # trblocked
 
+[![ci](https://github.com/reachdevel/trblocked/actions/workflows/ci.yml/badge.svg)](https://github.com/reachdevel/trblocked/actions/workflows/ci.yml) [![npm](https://img.shields.io/npm/v/trblocked)](https://www.npmjs.com/package/trblocked) [![license](https://img.shields.io/npm/l/trblocked)](LICENSE)
+
 **Bir site Türkiye'de neden açılmıyor?** DNS mi, IP mi, SNI mi, HTTP mi, yavaşlatma mı, yoksa site mi kapalı? `trblocked` bunu ayırt eder ve nedenini söyler.
 
 ```

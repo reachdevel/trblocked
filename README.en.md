@@ -1,5 +1,7 @@
 # trblocked
 
+[![ci](https://github.com/reachdevel/trblocked/actions/workflows/ci.yml/badge.svg)](https://github.com/reachdevel/trblocked/actions/workflows/ci.yml) [![npm](https://img.shields.io/npm/v/trblocked)](https://www.npmjs.com/package/trblocked) [![license](https://img.shields.io/npm/l/trblocked)](LICENSE)
+
 **Why won't this site open in Turkey?** DNS, IP, SNI, HTTP, throttling, or is the site simply down? `trblocked` tells those apart and explains which one it is.
 
 ```
