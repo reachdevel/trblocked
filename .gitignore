@@ -1,0 +1,8 @@
+node_modules
+dist
+*.tgz
+
+# local working notes and tool settings: not part of the project
+tasks/
+.claude/
+.DS_Store

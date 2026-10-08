@@ -1,0 +1,60 @@
+{
+  "name": "trblocked",
+  "version": "1.0.0",
+  "description": "Is this site blocked in Turkey, and how? Tells DNS, IP, SNI/DPI, HTTP and throttling blocks apart. / Bir sitenin Türkiye'de engelli olup olmadığını ve nasıl engellendiğini söyler.",
+  "keywords": [
+    "turkey",
+    "türkiye",
+    "censorship",
+    "sansür",
+    "engel",
+    "block",
+    "btk",
+    "dns",
+    "sni",
+    "dpi",
+    "cli",
+    "internet-censorship",
+    "network"
+  ],
+  "author": "Levent Kurt <reachdevel@gmail.com>",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/reachdevel/trblocked.git"
+  },
+  "homepage": "https://github.com/reachdevel/trblocked#readme",
+  "bugs": {
+    "url": "https://github.com/reachdevel/trblocked/issues"
+  },
+  "license": "MIT",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "bin": {
+    "trblocked": "dist/cli.js"
+  },
+  "files": [
+    "dist",
+    "config",
+    "locales"
+  ],
+  "scripts": {
+    "build": "node -e \"require('node:fs').rmSync('dist',{recursive:true,force:true})\" && tsc",
+    "typecheck": "tsc -p tsconfig.test.json",
+    "test": "node --test \"test/*.test.ts\"",
+    "prepublishOnly": "npm run build && npm run typecheck && npm test"
+  },
+  "engines": {
+    "node": ">=20.19"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "typescript": "^5.8.0"
+  }
+}

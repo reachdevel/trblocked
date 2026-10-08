@@ -1,0 +1,85 @@
+name: Yanlış ya da beklenmedik sonuç
+description: trblocked bir sitede yanlış, tutarsız ya da anlaşılmaz bir sonuç verdi
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Teşekkürler. **Başka sağlayıcılardan ve mobil hatlardan gelen gerçek ölçümler** projenin en çok ihtiyaç duyduğu şey.
+        Bazı sonuçlar doğası gereği dalgalıdır, bkz. [Bilinen sorunlar](https://github.com/reachdevel/trblocked#bilinen-sorunlar-ve-sınırlar).
+  - type: input
+    id: komut
+    attributes:
+      label: Çalıştırdığınız komut
+      placeholder: trblocked pastebin.com
+    validations:
+      required: true
+  - type: textarea
+    id: cikti
+    attributes:
+      label: Çıktı
+      description: "`--json` çıktısı en işe yarayanıdır (`evidence` kanıtları içerir). İsterseniz alan adını gizleyin."
+      render: shell
+    validations:
+      required: true
+  - type: textarea
+    id: beklenen
+    attributes:
+      label: Ne bekliyordunuz?
+      description: Tarayıcıda ne görüyorsunuz? Site açılıyor mu? Başka bir ağda/VPN ile ne oluyor?
+    validations:
+      required: true
+  - type: input
+    id: saglayici
+    attributes:
+      label: İnternet sağlayıcınız
+      placeholder: Superonline, Turkcell Mobil, Vodafone, TürkNet, Türk Telekom...
+    validations:
+      required: true
+  - type: dropdown
+    id: baglanti
+    attributes:
+      label: Bağlantı türü
+      options:
+        - Ev (sabit hat)
+        - Mobil
+        - Telefon hotspot'u
+        - Kurumsal / okul
+        - Diğer
+    validations:
+      required: true
+  - type: dropdown
+    id: vpn
+    attributes:
+      label: VPN açık mıydı?
+      options:
+        - Hayır
+        - Evet
+        - Emin değilim
+    validations:
+      required: true
+  - type: dropdown
+    id: tekrar
+    attributes:
+      label: Sorun tekrarlanıyor mu?
+      options:
+        - Her seferinde
+        - Bazen (sonuç değişiyor)
+        - Bir kez gördüm
+    validations:
+      required: true
+  - type: input
+    id: surum
+    attributes:
+      label: trblocked sürümü
+      description: "`trblocked --version`"
+      placeholder: trblocked 1.0.0
+    validations:
+      required: true
+  - type: input
+    id: ortam
+    attributes:
+      label: Ortam
+      description: "`node -v` ve işletim sistemi"
+      placeholder: Node 22.12, macOS 15
+    validations:
+      required: true

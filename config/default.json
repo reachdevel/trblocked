@@ -1,0 +1,91 @@
+{
+  "ispResolvers": [
+    "213.74.0.1",
+    "213.74.1.1",
+    "213.74.0.3",
+    "213.74.1.3",
+    "212.252.114.8",
+    "85.29.26.8"
+  ],
+  "dohEndpoints": [
+    {
+      "name": "cloudflare",
+      "url": "https://1.1.1.1/dns-query"
+    },
+    {
+      "name": "google",
+      "url": "https://8.8.8.8/resolve"
+    }
+  ],
+  "blockPageIps": [
+    "195.175.254.2"
+  ],
+  "neutralHost": "example.com",
+  "controlTarget": {
+    "host": "1.1.1.1",
+    "port": 443
+  },
+  "ports": {
+    "tls": 443,
+    "http": 80
+  },
+  "maxIps": 4,
+  "timeoutsMs": {
+    "dns": 3000,
+    "tcp": 5000,
+    "tls": 5000,
+    "http": 5000
+  },
+  "http": {
+    "signatures": [
+      {
+        "id": "btk-block-page",
+        "where": "body",
+        "pattern": "erişime engellenmiştir|has been blocked by the decision"
+      },
+      {
+        "id": "landpage-redirect",
+        "where": "location",
+        "pattern": "\\.esb\\.org\\.tr|/landpage\\?"
+      }
+    ],
+    "decisionPattern": ">([^<>]*erişime engellenmiştir[^<>]*)<",
+    "decisionAttempts": 3,
+    "decisionTimeoutMs": 2000,
+    "controlTimeoutMs": 3000,
+    "injection": {
+      "enabled": false,
+      "attempts": 8,
+      "timeoutMs": 2000
+    }
+  },
+  "reference": {
+    "enabled": true,
+    "globalping": {
+      "apiUrl": "https://api.globalping.io/v1",
+      "locations": [
+        {
+          "country": "DE",
+          "limit": 1
+        },
+        {
+          "country": "US",
+          "limit": 1
+        }
+      ],
+      "timeoutMs": 20000,
+      "pollIntervalMs": 500
+    }
+  },
+  "throttle": {
+    "enabled": false,
+    "maxBytes": 2000000,
+    "maxWindowMs": 5000,
+    "minBytes": 200000,
+    "ratio": 0.2,
+    "minControlBytesPerSec": 100000,
+    "externalControls": [
+      "https://speed.cloudflare.com/__down?bytes=10000000"
+    ]
+  }
+}
